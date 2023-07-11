@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 from pyscript import Element
 from pyodide_http import patch_all
 patch_all()
@@ -87,7 +88,8 @@ Element("form").element.onreset = reset_handler
 # function to manually add rows to the result
 def addRow():
     global result
-    result = result.concat(form_values, ignore_index=True)
+    # add check to see if form_values is empty
+    result = result.append(form_values, ignore_index = True)
     message = Element("message")
     reset_handler()
     message.write("Row successfully added")
@@ -97,3 +99,9 @@ def addRow():
 def updateTable():
     sheet = Element("sheet")
     sheet.write(result)
+
+# download csv file
+def downloadCSV():
+    global result
+    title = str(datetime.now()) + ".csv"
+    result.to_csv(title, index = True)

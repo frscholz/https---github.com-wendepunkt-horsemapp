@@ -75,3 +75,19 @@ body {
     color: white;
     border: none;
 }
+
+.form {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.input {
+    border: 2px solid black;
+  border-radius: 4px;
+}
+
+.input:focus {
+    background-color: lightblue;
+}

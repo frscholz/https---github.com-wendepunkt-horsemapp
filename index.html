@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>Horsemapp Unternehmen CSV Tool</title>
-        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="style.css" />
         <script defer src="https://pyscript.net/latest/pyscript.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
@@ -17,7 +17,7 @@
 
             <div class="right-side">
                 <h2>Add business manually to CSV file</h2>
-                <form id="form" py-submit="submit_handler()" reset="reset_handler">
+                <form id="form" py-submit="submit_handler()" reset="reset_handler" class="form">
                     <label for="name">Name:</label>
                     <input id="name" name="name" type="text" placeholder="Business" py-input="name_input_handler()">
                     
