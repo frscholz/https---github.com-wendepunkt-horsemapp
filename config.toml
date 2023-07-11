@@ -1,0 +1,2 @@
+packages = [ "pandas", "openpyxl", "pyodide-http", "requests"]
+name = "Horsemapp Unternehmen CSV Tool"

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Horsemapp Unternehmen CSV Tool</title>
+        <link rel="stylesheet" href="./style.css" />
+        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="left-side">
+                <h2>Googlemaps Places API Lead Generation</h2>
+            </div>
+
+            <div class="right-side">
+                <h2>Add business manually to CSV file</h2>
+                <form id="form" py-submit="submit_handler()" reset="reset_handler">
+                    <label for="name">Name:</label>
+                    <input id="name" name="name" type="text" placeholder="Business" py-input="name_input_handler()">
+                    
+                    <label for="email">Email:</label>
+                    <input id="email" name="email" type="email" placeholder="email@example.com" py-input="email_input_handler()">
+
+                    <label for="phone">Phone:</label>
+                    <input id="phone" name="phone" type="tel" placeholder="17647631085" py-input="phone_input_handler()">
+
+                    <label for="street">Street:</label>
+                    <input id="street" name="street" type="text" placeholder="Gartenstraße 34" py-input="street_input_handler()">
+
+                    <label for="city">City:</label>
+                    <input id="city" name="city" type="text" placeholder="Pullach" py-input="city_input_handler()">
+
+                    <label for="state">State:</label>
+                    <input id="state" name="state" type="text" placeholder="Bayern" py-input="state_input_handler()">
+
+                    <label for="zip">Zipcode:</label>
+                    <input id="zip" name="zip" type="text" placeholder="82049" py-input="zip_input_handler()">
+
+                    <label for="country">Country:</label>
+                    <select id="country" py-change="country_handler()">
+                        <option value="0">Germany</option>
+                    </select>
+
+                    <label for="website">Website:</label>
+                    <input id="website" name="website" type="url" placeholder="www.horsemapp.com" py-input="website_input_handler()">
+
+                    <div class="button-container">
+                        <button py-click="addRow()" id="add-row">Add Row</button>
+                        <button py-click="reset()" id="reset">Reset</button>
+                    </div>
+                </form>
+
+                <p id="message"></p>
+            </div>
+
+            <div class="rectangle" id="csv-content">
+                <h2>Result</h2>
+                
+                <p id="sheet"></p>
+
+                <div class="button-container">
+                    <button py-click="updateTable()" id="update-table">Update Table</button>
+                </div>
+
+                <div class="button-container">
+                    <button py-click="downloadCSV()" id="download">Download CSV</button>
+                </div>
+            </div>
+        </div>
+
+        <py-env>
+            paths
+                ./main.py
+        </py-env>
+        <py-config src="./config.toml"></py-config>
+        <py-script src="./main.py"></py-script>
+    </body>
+</html>
