@@ -3,7 +3,25 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>Horsemapp Unternehmen CSV Tool</title>
+        <title>Dienstleister2CSV</title>
+        
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.1.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.1.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.1.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.1.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/material-components-web@7.0.0/dist/material-components-web.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.holoviz.org/panel/1.0.3/dist/panel.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/panel.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+          Bokeh.set_log_level("info");
+        </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/css/loading.css" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/css/listpanel.css" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/theme/default.css" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/theme/material_variables.css" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/theme/material.css" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/css/select.css" crossorigin="anonymous" />
+        
         <link rel="stylesheet" href="style.css" />
         <script defer src="https://pyscript.net/latest/pyscript.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
@@ -59,16 +77,17 @@
             <div class="rectangle" id="csv-content">
                 <h2>Result</h2>
                 
-                <p id="sheet"></p>
+                <div id="sheet"></div>
 
                 <div class="button-container">
                     <button py-click="updateTable()" id="update-table">Update Table</button>
                 </div>
-
-                <div class="button-container">
-                    <button py-click="downloadCSV()" id="download">Download CSV</button>
-                </div>
+                <div id="download"></div>
             </div>
+        </div>
+        
+        <div>
+            <py-terminal>
         </div>
 
         <py-env>

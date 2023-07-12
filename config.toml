@@ -1,2 +1,4 @@
-packages = [ "pandas", "openpyxl", "pyodide-http", "requests"]
-name = "Horsemapp Unternehmen CSV Tool"
+packages = ["https://cdn.holoviz.org/panel/1.0.3/dist/wheels/bokeh-3.1.1-py3-none-any.whl",
+            "https://cdn.holoviz.org/panel/1.0.3/dist/wheels/panel-1.0.3-py3-none-any.whl",
+            "pandas", "openpyxl", "pyodide-http"]
+name = "Dienstleister2CSV"

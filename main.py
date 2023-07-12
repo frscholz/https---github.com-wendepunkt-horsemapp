@@ -1,5 +1,8 @@
 import pandas as pd
+import panel as pn
 from datetime import datetime
+import io
+from io import StringIO
 from pyscript import Element
 from pyodide_http import patch_all
 patch_all()
@@ -98,10 +101,16 @@ def addRow():
 # write df to paragraph
 def updateTable():
     sheet = Element("sheet")
-    sheet.write(result)
+    sheet.clear()
+    sheet.element.innerHTML = result.to_html(class="table")
+    # display(result, target="sheet", append=False)
 
-# download csv file
-def downloadCSV():
+# download csv
+def get_csv():
     global result
-    title = str(datetime.now()) + ".csv"
-    result.to_csv(title, index = True)
+    return io.BytesIO(result.to_csv().encode())
+
+# Panel widgets
+pn.extension(design='material')
+file_download_csv = pn.widgets.FileDownload(filename="data.csv", callback=get_csv, button_type="primary")    
+pn.Column(file_download_csv).servable(target="download")
