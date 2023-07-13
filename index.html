@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>Dienstleister2CSV</title>
+<head>
+    <title>Ancient King</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
         
-        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.1.1.min.js"></script>
-        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.1.1.min.js"></script>
-        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.1.1.min.js"></script>
-        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.1.1.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/material-components-web@7.0.0/dist/material-components-web.min.js" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://cdn.holoviz.org/panel/1.0.3/dist/panel.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/panel.min.js" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-          Bokeh.set_log_level("info");
-        </script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/css/loading.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/css/listpanel.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/theme/default.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/theme/material_variables.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/theme/material.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/css/select.css" crossorigin="anonymous" />
-        
-        <link rel="stylesheet" href="style.css" />
-        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.1.1.min.js"></script>        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/bundled/material-components-web@7.0.0/dist/material-components-web.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.holoviz.org/panel/1.0.3/dist/panel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.0.3/dist/panel.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+    
+    <link rel="stylesheet" href="./style.css" />
+    <script defer src="https://pyscript.net/releases/2023.03.1/pyscript.js"></script>
+</head>
+<body>
+    <py-config src="./pyscript.toml"></py-config>
+    <py-script src="./main.py"></py-script>
 
-    <body>
-        <div class="container">
+    <div class="container">
             <div class="left-side">
                 <h2>Googlemaps Places API Lead Generation</h2>
             </div>
@@ -59,6 +53,7 @@
 
                     <label for="country">Country:</label>
                     <select id="country" py-change="country_handler()">
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="0">Germany</option>
                     </select>
 
@@ -67,7 +62,7 @@
 
                     <div class="button-container">
                         <button py-click="addRow()" id="add-row">Add Row</button>
-                        <button py-click="reset()" id="reset">Reset</button>
+                        <button py-click="reset_handler()" id="reset">Reset</button>
                     </div>
                 </form>
 
@@ -85,16 +80,7 @@
                 <div id="download"></div>
             </div>
         </div>
-        
-        <div>
-            <py-terminal>
-        </div>
 
-        <py-env>
-            paths
-                ./main.py
-        </py-env>
-        <py-config src="./config.toml"></py-config>
-        <py-script src="./main.py"></py-script>
-    </body>
+        <div id="startup"></div>
+</body>
 </html>

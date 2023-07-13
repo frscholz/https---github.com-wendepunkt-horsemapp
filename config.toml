@@ -1,4 +1,4 @@
-packages = ["https://cdn.holoviz.org/panel/1.0.3/dist/wheels/bokeh-3.1.1-py3-none-any.whl",
+packages = ["markdown-it-py==2.2.0",
+            "https://cdn.holoviz.org/panel/1.0.3/dist/wheels/bokeh-3.1.1-py3-none-any.whl",
             "https://cdn.holoviz.org/panel/1.0.3/dist/wheels/panel-1.0.3-py3-none-any.whl",
-            "pandas", "openpyxl", "pyodide-http"]
-name = "Dienstleister2CSV"
+            'pyodide-http==0.2.1', 'hvplot', 'numpy', 'pandas']
