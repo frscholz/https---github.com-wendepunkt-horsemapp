@@ -17,15 +17,44 @@
     
     <link rel="stylesheet" href="./style.css" />
     <script defer src="https://pyscript.net/releases/2023.03.1/pyscript.js"></script>
+    <py-config src="./pyscript.toml">
+        [[fetch]]
+        files = ["/request.py", "/coordinates.csv"]
+    </py-config>
 </head>
 <body>
-    <py-config src="./pyscript.toml"></py-config>
     <py-script src="./main.py"></py-script>
 
     <div class="container">
             <div class="left-side">
-                <h2>Googlemaps Places API Lead Generation</h2>
+            <h2>Googlemaps Places API Lead Generation</h2>
+            <p>This script uses the Googlemaps Places API to find businesses matching a query. 
+                Please enter a CSV with a list of coordinates to search for below.</p>
+
+            <div id="api-key">
+                <label for="input-text">Enter Googlemaps Places API key:</label>
+                <input type="password" id="key" placeholder="Enter API key" py-input="key_input_handler()"><br><br>
             </div>
+                
+            <!--    
+            <div class="upload-csv">
+                <label for="upload-csv">Upload CSV:</label>
+                <input type="file" id="upload-csv" accept=".csv">
+                <div class="button-container">
+                    <button onclick="processCSV()">Process CSV</button>
+                </div>
+            </div>
+            -->    
+            
+            <label for="input-text">Enter Query here (one word):</label>
+            <input type="text" id="queries" placeholder="Enter query"><br><br>
+            
+            <div class="button-container">
+                <button py-click="runScript()" id="run-script" class="py-button">Run Script</button>
+            </div>
+            
+            <div id="output"></div>
+        </div>
 
             <div class="right-side">
                 <h2>Add business manually to CSV file</h2>

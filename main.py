@@ -3,8 +3,14 @@ from js import document
 import pandas as pd
 import panel as pn
 from io import StringIO
+import time
+import asyncio
+from request import request
 
 result = pd.DataFrame()
+
+keyword = ""
+api_key = ""
 
 form_values = {
     "name": "",
@@ -70,6 +76,14 @@ def reset_handler():
 
 def setup_handler():
     document.getElementById("startup").value = 'Ready'
+
+def key_input_handler(event = None):
+    if event:
+        api_key = event.target.value
+
+def query_input_handler(event = None):
+    if event:
+        keyword = event.target.value
         
 # Map event handlers to elements
 
@@ -84,6 +98,8 @@ add_event_listener(document.getElementById("country"), "change", country_handler
 Element("website").element.oninput = website_input_handler
 Element("form").element.onsubmit = submit_handler
 add_event_listener(document.getElementById("download"), "change", setup_handler)
+Element("key").element.oninput = key_input_handler
+Element("queries").element.oninput = query_input_handler
 
 # function to manually add rows to the result
 def addRow():
@@ -109,3 +125,46 @@ file_download_csv = pn.widgets.FileDownload(filename="data.csv", callback=get_cs
 success = pn.pane.Alert("Ready", alert_type="success")
 pn.Column(file_download_csv).servable(target="download")
 pn.Column(success).servable(target="startup")
+
+# Googlemaps Script
+baseurl = "https://maps.googleapis.com/maps/api/place/nearbysearch/"
+placeurl = "https://maps.googleapis.com/maps/api/place/details/"
+headers = {}
+radius = 20000
+
+# please refer to googlemaps.py script for more readable code. 
+def runScript():
+    display("Running script...", target="output")
+    coordinates = pd.read_csv('coordinates.csv')
+    temp = coordinates.apply(lambda row: getPlaces((row["latitude"], row["longitude"])), axis=1)
+    places = pd.DataFrame()
+    for i in range(len(temp)):
+        temp2 = pd.DataFrame.from_dict(temp[i]) # TODO: Error here
+        places = pd.concat([places, temp2], ignore_index=True) 
+    places.drop_duplicates(['place_id'])
+    places2 = pd.DataFrame()
+    places2 = places.apply(lambda row: getPlaceDetails(row['place_id']), axis=1)
+    normalized = pd.json_normalize(places2)
+    result = pd.concat([result, normalized], ignore_index=True)
+    Element("output").clear()
+    display("Script done!", target="output")
+
+async def getPlaces(location):
+    places = []
+    url = baseurl + "json?location=" + location + "&radius=" + radius + "&keyword=" + keyword + "&key=" + api_key
+    response = await request(url, method="GET", headers=headers)
+    places = places + response['results']
+    while('next_page_token' in response):
+        time.sleep(2)
+        next_url = baseurl + "json?pagetoken=" + response['next_page_token']
+        response = await request(next_url, method="GET", headers=headers)
+        places = places + response['results']
+    return places
+
+async def getPlaceDetails(place_id):
+    fields = ['place_id','name', 'formatted_address', 'formatted_phone_number','rating', 'website', 'opening_hours']
+    url = placeurl + "json?place_id=" + place_id + "&fields=" + fields + "&key=" + api_key
+    response = await request(url, method="GET", headers=headers)
+    return response['result']
+
+# asyncio.ensure_future(runScript())   
