@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Ancient King</title>
+    <title>DienstleisterTool</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
         
@@ -33,7 +33,7 @@
 
             <div id="api-key">
                 <label for="input-text">Enter Googlemaps Places API key:</label>
-                <input type="password" id="key" placeholder="Enter API key" py-input="key_input_handler()"><br><br>
+                <input name="key" type="password" id="key" placeholder="Enter API key" py-input="key_input_handler()">
             </div>
                 
             <!--    
@@ -47,13 +47,14 @@
             -->    
             
             <label for="input-text">Enter Query here (one word):</label>
-            <input type="text" id="queries" placeholder="Enter query"><br><br>
+            <input name="queries" type="text" id="queries" placeholder="Enter query" py-input="query_input_handler()">
             
             <div class="button-container">
                 <button py-click="runScript()" id="run-script" class="py-button">Run Script</button>
             </div>
             
             <div id="output"></div>
+            <p id="places"></p>
         </div>
 
             <div class="right-side">
